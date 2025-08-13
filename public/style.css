@@ -1,0 +1,71 @@
+/* --- Global Styles & Body --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #121212; /* Dark background */
+    color: #e0e0e0; /* Light text color */
+    overflow: hidden;
+}
+
+/* --- Main Content Container --- */
+.container {
+    text-align: center;
+    background: #1e1e1e; /* Slightly lighter container background */
+    padding: 40px 50px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border: 1px solid #333;
+    width: 90%;
+    max-width: 500px;
+}
+
+/* --- Typography --- */
+h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+#status {
+    font-size: 1.1rem;
+    color: #a0a0a0;
+    min-height: 25px; /* Prevents layout shift when text changes */
+    margin-bottom: 30px;
+    transition: color 0.3s ease;
+}
+
+/* --- The Main Button --- */
+#talkButton {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(45deg, #007bff, #00d4ff);
+    border: none;
+    border-radius: 50px; /* Fully rounded */
+    padding: 15px 40px;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 150, 255, 0.2);
+}
+
+#talkButton:hover {
+    transform: translateY(-3px); /* Lifts the button on hover */
+    box-shadow: 0 8px 25px rgba(0, 150, 255, 0.4);
+}
+
+#talkButton:active {
+    transform: translateY(0); /* Puts it back down when clicked */
+    box-shadow: 0 4px 15px rgba(0, 150, 255, 0.2);
+}
