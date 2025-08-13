@@ -1,5 +1,3 @@
-// client.js - FINAL VERSION
-
 document.addEventListener('DOMContentLoaded', () => {
     const talkButton = document.getElementById('talkButton');
     const statusDiv = document.getElementById('status');
@@ -20,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
         socket.onmessage = (event) => {
             const data = JSON.parse(event.data);
             if (data.text) {
-                // Use the browser's Speech Synthesis to speak the text
                 speak(data.text);
             } else if (data.error) {
                 console.error('Error from server:', data.error);
@@ -37,27 +34,22 @@ document.addEventListener('DOMContentLoaded', () => {
             talkButton.disabled = true;
         };
     }
-
-    // --- Text-to-Speech Function ---
     function speak(text) {
-        // Stop any ongoing speech to handle interruptions
         window.speechSynthesis.cancel(); 
 
         const utterance = new SpeechSynthesisUtterance(text);
         utterance.onstart = () => {
             statusDiv.textContent = 'AI is speaking...';
-            talkButton.disabled = true; // Disable button while AI speaks
+            talkButton.disabled = true;
         };
         utterance.onend = () => {
             statusDiv.textContent = 'Click to speak';
-            talkButton.disabled = false; // Re-enable button after AI finishes
+            talkButton.disabled = false;
         };
         window.speechSynthesis.speak(utterance);
     }
 
-    // --- Microphone Recording Functions ---
     async function startRecording() {
-        // If AI is speaking, interrupt it.
         window.speechSynthesis.cancel();
 
         isRecording = true;
@@ -74,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             };
             
-            mediaRecorder.start(300); // Send audio data every 300ms
+            mediaRecorder.start(300);
         } catch (err) {
             console.error('Error accessing microphone:', err);
             statusDiv.textContent = 'Could not access microphone.';
@@ -86,14 +78,12 @@ document.addEventListener('DOMContentLoaded', () => {
     function stopRecording() {
         if (mediaRecorder && mediaRecorder.state === 'recording') {
             mediaRecorder.stop();
-            // Once stopped, ondataavailable will fire one last time with remaining data
         }
         isRecording = false;
         talkButton.textContent = 'Start Talking';
         statusDiv.textContent = 'Processing...';
     }
 
-    // --- Event Listener ---
     talkButton.addEventListener('click', () => {
         if (!isRecording) {
             startRecording();
@@ -105,4 +95,5 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Initial Setup ---
     talkButton.disabled = true;
     connectWebSocket();
+
 });
